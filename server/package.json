@@ -12,8 +12,16 @@
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^4.9.0",
+    "bcrypt": "^5.1.0",
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.9",
     "cors": "^2.8.5",
-    "express": "^4.18.2"
+    "dayjs": "^1.11.7",
+    "express": "^4.18.2",
+    "express-config": "^0.0.1",
+    "express-jwt": "^8.3.0",
+    "express-validator": "^6.14.3",
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.20",

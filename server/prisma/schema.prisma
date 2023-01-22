@@ -10,12 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model filme {
+  id_filme Int      @id @default(autoincrement())
+  Filme    String
+  Sessao   Sessao[]
+}
+
 model Usuarios {
   id_user   Int      @id @default(autoincrement())
-  nome      String
+  email     String
+  senha     String
   estudante Boolean
   atendente Boolean
-  Ticket    Ticket[]
+  Venda     Venda[]
 
   @@map("usuarios")
 }
@@ -32,26 +39,30 @@ model Sala {
 model Sessao {
   id_sessao Int      @id @default(autoincrement())
   id_sala   Int
-  filme     String
+  id_filme  Int
   data_ini  DateTime
   data_fim  DateTime
   valor     Float
   sala      Sala     @relation(fields: [id_sala], references: [id_sala])
-  Ticket    Ticket[]
+  filme     filme    @relation(fields: [id_filme], references: [id_filme])
+  Venda     Venda[]
 
   @@map("sessao")
 }
 
-model Ticket {
-  id_ticket   Int   @id @default(autoincrement())
-  id_user     Int
-  id_sessao   Int
-  valor       Float
-  valor_atual Float
-
+model Venda {
+  id_venda        Int      @id @default(autoincrement())
+  id_user         Int
+  id_sessao       Int
+  potrona         Int[]
   user            Usuarios @relation(fields: [id_user], references: [id_user])
   sessao          Sessao   @relation(fields: [id_sessao], references: [id_sessao])
+}
 
+model Ticket {
+  id_ticket       Int       @id @default(autoincrement())
+  valor           Float
+  valor_atual     Float
 
   @@map("ticket")
 }
